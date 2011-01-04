@@ -34,7 +34,11 @@ namespace TropoCSharp.Tropo
             
             // Get the response.
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            return response.GetResponseStream();
+            var result = response.GetResponseStream();
+            // Necessary to close to support multiple requests
+            response.Close();
+
+            return result;
         }
 
         public static Stream CreateSession(this Tropo tropo, String token)
@@ -48,7 +52,11 @@ namespace TropoCSharp.Tropo
 
             // Get the response.
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            return response.GetResponseStream();
+            var result = response.GetResponseStream();
+            // Necessary to close to support multiple requests
+            response.Close();
+
+            return result;
         }
     }
 }
